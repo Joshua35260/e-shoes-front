@@ -1,0 +1,48 @@
+// components //
+@use "./components/Navbar";
+@use "./components/Footer";
+
+// screens //
+@use "./screens/Homepage";
+
+// font
+// @font-face {
+//   font-family: "DaneehandDemo";
+//   src: url("../fonts/DaneehandDemo.otf");
+//   src: url("../fonts/DaneehandDemo.woff") format("woff");
+//   }
+
+// @font-face {
+//   font-family:"TYPO_COMICS_Light_demo";
+//   src: url("../fonts/TYPO_COMICS_Light_demo.otf");
+//   }
+
+// Global ///////////////
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  // background-image: url(../img/Background.png);
+  // background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100vh;
+  width: 100vw;
+  font-family: "Montserrat", sans-serif;
+  user-select: none;
+  // overflow-x: hidden;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  button {
+    cursor: pointer;
+  }
+}

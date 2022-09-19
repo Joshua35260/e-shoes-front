@@ -1,0 +1,10 @@
+.homepageContainer {
+  display: flex;
+  min-height: 70vh;
+  background-color: rgb(255, 255, 255);
+  .homepage {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}

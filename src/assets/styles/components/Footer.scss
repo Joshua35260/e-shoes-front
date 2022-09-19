@@ -1,0 +1,10 @@
+.footerContainer {
+  display: flex;
+  height: 20vh;
+  background-color: rgb(50, 50, 50);
+  .footer {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}

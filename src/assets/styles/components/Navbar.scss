@@ -1,0 +1,10 @@
+.navbarContainer {
+  display: flex;
+  height: 10vh;
+  background-color: rgb(50, 50, 50);
+  .navbar {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+}
