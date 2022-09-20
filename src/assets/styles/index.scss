@@ -5,17 +5,11 @@
 // screens //
 @use "./screens/Homepage";
 
-// font
-// @font-face {
-//   font-family: "DaneehandDemo";
-//   src: url("../fonts/DaneehandDemo.otf");
-//   src: url("../fonts/DaneehandDemo.woff") format("woff");
-//   }
-
-// @font-face {
-//   font-family:"TYPO_COMICS_Light_demo";
-//   src: url("../fonts/TYPO_COMICS_Light_demo.otf");
-//   }
+// fonts //
+@import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Urbanist:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Oswald&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 
 // Global ///////////////
 *,
@@ -25,34 +19,58 @@
   padding: 0;
   box-sizing: border-box;
 }
-ul {
-  list-style: none;
-  padding: 0;
-}
+:root {
+  --primary-1: #3498db;
+  --primary-2: #2980b9;
+  --danger-1: #e74c3c;
+  --danger-2: #c0392b;
+  --success-1: #2ecc71;
+  --success-2: #27ae60;
 
-img {
-  max-width: 100%;
-}
+  --gray-1: #d9d9d9;
 
-a {
-  text-decoration: none;
-}
+  --white: white;
 
-a:link,
-a:visited {
-  text-decoration: none;
-}
-body {
-  // background-image: url(../img/Background.png);
-  // background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  height: 100vh;
-  width: 100vw;
-  font-family: "Montserrat", sans-serif;
-  user-select: none;
+  --black-logo: #060606;
+  --black-bg: #0d1117;
+  --black-header: #211e1e;
+  --orange-logo: #f15412;
 
-  button {
-    cursor: pointer;
+  --border: 1px solid var(--gray-2);
+
+  --font-family-1: "Oswald";
+  --font-family-2: "Urbanist";
+  --font-family-3: "Roboto";
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+
+  a:link,
+  a:visited {
+    text-decoration: none;
+  }
+  body {
+    // background-image: url(../img/Background.png);
+    // background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+    font-family: var(--font-family-2);
+    user-select: none;
+
+    button {
+      cursor: pointer;
+    }
   }
 }

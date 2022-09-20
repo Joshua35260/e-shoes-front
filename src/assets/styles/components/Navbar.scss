@@ -3,7 +3,7 @@
   justify-content: space-around;
   align-items: center;
   height: 100px;
-  background-color: rgb(70, 170, 200);
+  background-color: #211e1e;
 
   .firstNav {
     position: relative;
@@ -14,7 +14,7 @@
   .secondNav {
     display: flex;
     position: relative;
-    right: 5vw;
+    right: 6vw;
     justify-content: center;
     align-items: center;
     flex-direction: row;
@@ -39,30 +39,28 @@
     align-items: center;
     height: 30px;
     width: 31ch;
+    margin-right: 1vw;
     // height: fit-content;
   }
   a {
     text-decoration: none;
-    color: white;
+    color: var(--gray-1);
     position: relative;
     font-weight: bolder;
     :hover {
-      color: white;
+      color: var(--orange-logo);
       transition-duration: 0.5s;
     }
-    ::after {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 100%;
-      height: 2px;
-      transform: scaleX(0);
-      transform-origin: left;
-      background: white;
-      transition: transform 0.5s ease-out;
+  }
+  @media screen and (max-width: 1000px) {
+    .inputNav {
+      display: none;
     }
-    :hover::after {
-      transform: scaleX(1);
-    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .navbarContainer {
+    display: none;
   }
 }
