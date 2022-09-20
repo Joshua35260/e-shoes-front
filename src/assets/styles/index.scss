@@ -25,7 +25,23 @@
   padding: 0;
   box-sizing: border-box;
 }
+ul {
+  list-style: none;
+  padding: 0;
+}
 
+img {
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  text-decoration: none;
+}
 body {
   // background-image: url(../img/Background.png);
   // background-size: cover;
@@ -35,12 +51,6 @@ body {
   width: 100vw;
   font-family: "Montserrat", sans-serif;
   user-select: none;
-  // overflow-x: hidden;
-
-  a {
-    text-decoration: none;
-    color: white;
-  }
 
   button {
     cursor: pointer;
