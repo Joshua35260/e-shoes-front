@@ -1,0 +1,93 @@
+.adminReset {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+
+  .resetFormOutside {
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .resetForm {
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    color: black;
+    width: 40vw;
+    height: auto;
+    padding: 20px;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    .resetFormTitle {
+      color: white;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+    }
+
+    .warnContainer {
+      color: rgb(196, 0, 0);
+      display: flex;
+      gap: 10px;
+
+      .warn {
+        font-size: 1.2rem;
+      }
+
+      .warnIcon {
+        margin-top: 1.5px;
+      }
+    }
+
+    .confirmedContainer {
+      color: green;
+      display: flex;
+      gap: 10px;
+    }
+
+    input {
+      border-radius: 5px;
+      font-size: 1.5rem;
+      width: 30vw;
+      padding: 2px 5px;
+    }
+
+    label {
+      text-align: left;
+    }
+
+    .submit {
+      margin-top: 10px;
+      font-size: 1rem;
+      padding: 5px 15px;
+      width: 10vw;
+    }
+
+    .passwordField {
+      position: relative;
+
+      .visibility {
+        color: black;
+        cursor: pointer;
+        position: absolute;
+        right: 2%;
+        top: 16%;
+      }
+    }
+  }
+}

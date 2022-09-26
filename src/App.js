@@ -1,16 +1,34 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import Homepage from "./screens/Homepage";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import Admin from "./admin/screens/Admin";
+import AdminLogin from "./admin/screens/AdminLogin";
+import Shoes from "./admin/screens/Shoes";
+import { AdminContextProvider } from "./admin/contexts/AdminContext";
+import Protected from "./admin/components/Protected";
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-      </Routes>
-      <Footer />
+      <AdminContextProvider>
+        <Routes>
+          {/* ROUTES APP */}
+          <Route path="/" element={<Homepage />} />
+
+          {/* ROUTES ADMIN */}
+          <Route path="login" element={<AdminLogin />} />
+          <Route
+            path="admin"
+            element={
+              <Protected>
+                <Admin />
+              </Protected>
+            }
+          >
+            <Route path="contenu" element={<Shoes />} />
+            <Route path="shoes" element={<Shoes />} />
+          </Route>
+        </Routes>
+      </AdminContextProvider>
     </>
   );
 }

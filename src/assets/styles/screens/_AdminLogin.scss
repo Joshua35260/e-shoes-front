@@ -1,0 +1,57 @@
+.adminLogin {
+  overflow: hidden;
+  color: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    input {
+      border-radius: 5px;
+      font-size: 1.5rem;
+      width: 30vw;
+      padding: 2px 5px;
+    }
+
+    label {
+      text-align: left;
+    }
+
+    .submit {
+      margin-top: 10px;
+      font-size: 1rem;
+      padding: 5px 15px;
+    }
+
+    .warnContainer {
+      color: rgb(196, 0, 0);
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
+      .warn {
+        font-size: 1.2rem;
+      }
+
+      .warnIcon {
+        margin-top: 1.5px;
+      }
+    }
+  }
+
+  .passwordField {
+    position: relative;
+
+    .visibility {
+      color: black;
+      cursor: pointer;
+      position: absolute;
+      right: 2%;
+      top: 16%;
+    }
+  }
+}

@@ -1,9 +1,19 @@
-// components //
+// components APP //
 @use "./components/Navbar";
 @use "./components/Footer";
 
-// screens //
+// screens APP //
 @use "./screens/Homepage";
+
+// screens admin //
+@use "./screens/Admin";
+@use "./screens/AdminLogin";
+
+// components admin //
+@use "./components/AdminReset";
+@use "./components/Logo";
+@use "./components/ShoesId";
+@use "./components/LeftBand";
 
 // fonts //
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap");
@@ -28,8 +38,6 @@
   --success-2: #27ae60;
 
   --gray-1: #d9d9d9;
-
-  --white: white;
 
   --black-logo: #060606;
   --black-bg: #0d1117;

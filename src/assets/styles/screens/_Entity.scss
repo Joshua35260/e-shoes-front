@@ -1,0 +1,168 @@
+$font-clr: #efefef;
+$lfs-orange: #cf7e21;
+$lfs-yellow: #fab700;
+$lfs-white: #e5e5e6;
+$lfs-black: #161412;
+
+.entity {
+  padding-left: 50px;
+  max-height: 70vh;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .addForm {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2;
+    top: 0;
+    left: 0;
+  }
+
+  .adminControls {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.entity-title {
+  position: sticky;
+  left: 0;
+  font-size: 80px;
+  padding: 50px;
+  color: $lfs-white;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.modalBg {
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.adminTableNav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+
+  .adminTableNavButton {
+    background: rgb(2, 38, 123);
+    color: black;
+    border-radius: 4px;
+    width: 50px;
+  }
+}
+
+.entity-table {
+  width: 100%;
+
+  thead {
+    background-color: $lfs-white;
+
+    th {
+      color: $lfs-black;
+      text-transform: uppercase;
+      text-align: center;
+      overflow: hidden;
+      padding: 10px;
+      border: 1px solid $lfs-black;
+      max-width: 8vw;
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid #06887b;
+      color: $lfs-white;
+
+      &:nth-child(even) {
+        background-color: rgba(174, 174, 18, 0.517);
+      }
+
+      td {
+        padding: 10px;
+        border: 1px solid #9a6161;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 10vw;
+      }
+
+      th {
+        padding-left: 10px;
+        border: 1px solid #840707;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 8vw;
+      }
+
+      .entity-action {
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+  }
+}
+
+#cepagesTable {
+  width: inherit;
+}
+
+.entry-add {
+  background-color: rgb(132, 0, 0);
+  border: none;
+  border-radius: 3px;
+  padding: 15px;
+  color: black;
+  font-weight: bold;
+  margin-bottom: 30px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgb(107, 0, 0);
+  }
+}
+
+.content-table {
+  tbody {
+    tr {
+      td {
+        max-width: 20vw;
+      }
+    }
+  }
+}
+
+.searchInTable[type="text"] {
+  position: sticky;
+  left: 0;
+  width: 15vw;
+  border: 1px solid $lfs-black;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: 0.3s;
+}
+
+.entity-container {
+  height: 50vh;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  padding-bottom: 3vh;
+  margin-bottom: 3vh;
+}
+
+.entity-container::-webkit-scrollbar {
+  display: none;
+}

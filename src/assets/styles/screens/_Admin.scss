@@ -1,0 +1,186 @@
+.admin {
+  display: flex;
+  align-content: center;
+  color: white;
+  font-weight: bold;
+  min-width: 1000px;
+  height: 100vh;
+  overflow: hidden;
+  background-color: rgb(50, 50, 50);
+}
+
+.adminAdmin {
+  display: flex;
+  color: blue;
+  font-weight: bold;
+  min-width: 1200px;
+  padding: 0 60px 0 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.adminLinkHome {
+  align-self: center;
+}
+
+.logo {
+  height: 10vh;
+}
+
+.admin h2 {
+  font-size: 1.2rem;
+  padding: 10px 15px;
+}
+
+.admin h2:hover {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.adminRightBand {
+  height: 100vh;
+  width: 80vw;
+}
+
+.adminRightBandForm {
+  display: flex;
+  flex-direction: column;
+  height: 70vh;
+  width: 75vw;
+  min-width: 900px;
+}
+// pour voir une region /id
+.adminRightBandId {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
+  width: 75vw;
+  // min-width:900px;
+}
+.adminImgApercu {
+  max-width: 5vw;
+}
+
+.adminForm {
+  background-color: rgb(25, 25, 25);
+  max-height: 70vh;
+  width: 50vw;
+  min-width: 1000px;
+  border-radius: 20px;
+  padding: 20px 20px 10px 20px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.adminChamp {
+  padding: 20px 20px 0 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminChamp label {
+  width: 400px;
+  span {
+    font-size: 12px;
+  }
+}
+
+.adminChamp input {
+  width: 40vw;
+  min-width: 400px;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 8px;
+}
+input[type="file"]::file-selector-button {
+  border: 2px solid #bc801f;
+  padding: 0.2em 0.4em;
+  border-radius: 0.4em;
+  background-color: #d68214;
+  transition: 1s;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #eccc81;
+  border: 2px solid #ce6700;
+}
+.adminForm textarea {
+  width: 40vw;
+  min-width: 400px;
+  height: 75px;
+  border-radius: 5px;
+  padding: 8px 8px;
+}
+
+.adminTitle {
+  font-size: 30px;
+  padding: 0 0 10px 10px;
+}
+
+.adminFormButton {
+  padding: 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  justify-self: center;
+  &:hover {
+    background-color: #eccc81;
+    // border: 2px solid #ce6700;
+  }
+}
+
+.adminSelect {
+  width: 40vw;
+  min-width: 400px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+}
+
+.adminFormButton {
+  margin: 40px 0;
+  align-self: center;
+}
+
+.logout,
+.changeCredentials {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+  font-size: 1rem;
+  padding: 10px;
+  color: white;
+}
+
+.changeCredentials {
+  top: 80px;
+}
+
+.logout:hover,
+.return:hover,
+.changeCredentials:hover {
+  background-color: whitesmoke;
+  color: black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.return {
+  position: absolute;
+  width: auto;
+  top: 30px;
+  left: 40px;
+  padding: 10px;
+  text-decoration: underline;
+}
+
+.return p {
+  font-size: 1rem;
+}

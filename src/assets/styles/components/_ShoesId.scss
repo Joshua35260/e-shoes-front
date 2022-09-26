@@ -1,0 +1,53 @@
+.shoesId {
+  text-align: center;
+
+  .adminForm {
+    align-items: center;
+
+    p {
+      font-size: 1rem;
+      padding: 10px 0;
+    }
+
+    .headInfo {
+      display: flex;
+    }
+
+    .contactInfo {
+      display: flex;
+    }
+
+    .openingHours {
+      background: whitesmoke;
+      color: black;
+      padding: 10px;
+      border-radius: 10px;
+
+      h1 {
+        text-decoration: underline;
+      }
+    }
+
+    .adressContainer {
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+
+      .adress {
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        background: whitesmoke;
+        color: black;
+        padding: 20px;
+        height: fit-content;
+        border-radius: 10px;
+      }
+    }
+
+    .descInfo {
+      display: grid;
+      grid-template-columns: 40vh 40vh;
+    }
+  }
+}

@@ -1,0 +1,177 @@
+.shoesPage {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shoesPres {
+  position: relative;
+  display: flex;
+  text-align: center;
+}
+
+.pImg {
+  width: 100%;
+  height: 30vh;
+  filter: brightness(50%);
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.pText {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 35ch;
+  text-align: start;
+}
+
+.pTitle {
+  font-weight: bold;
+  text-align: center;
+}
+
+.frame {
+  position: absolute;
+}
+
+.top {
+  top: 0px;
+  right: 10px;
+}
+
+.bottom {
+  left: 0px;
+  bottom: 0px;
+}
+
+.shoesOffer {
+  display: flex;
+  flex-direction: column;
+  max-height: fit-content;
+  overflow: hidden;
+}
+
+.shoesContactSubContainer {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-around;
+  width: 80vw;
+  gap: 10px;
+
+  .shoesContactLeft,
+  .shoesContactRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .shoesContactLeft {
+    flex-direction: column-reverse;
+  }
+
+  .horaires {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+  }
+}
+
+.pOffer {
+  position: relative;
+  padding: 30px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 75%;
+  align-self: center;
+  text-align: start;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+.siteshoes,
+.telshoes {
+  flex-shrink: 0;
+}
+
+.siteshoes {
+  text-decoration: underline;
+}
+
+.shoesContact {
+  display: block;
+
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  margin-bottom: 2em;
+  padding: 0 2rem;
+}
+
+.leaflet {
+  max-height: 400px;
+  overflow: hidden;
+}
+
+.leafletCtn {
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .shoesContactSubContainer {
+    flex-direction: row;
+  }
+
+  .shoesPage * {
+    font-size: 1.2rem;
+  }
+
+  .shoesContact {
+    display: flex;
+    text-align: start;
+  }
+
+  .pText {
+    top: 40%;
+    max-width: 80ch;
+    gap: 80px;
+  }
+  .top {
+    top: -10px;
+    right: -10px;
+  }
+  .pOffer {
+    padding: 40px;
+  }
+  .bottom {
+    left: -10px;
+    bottom: -15px;
+  }
+  .pImg {
+    height: 40vh;
+    object-fit: cover;
+  }
+
+  .shoesOffer {
+    padding: 20px;
+  }
+
+  .frameshoes {
+    width: 40em;
+    min-width: 40em;
+  }
+}
+.leafletCtn {
+  display: flex;
+  flex-direction: column;
+  height: 50vh;
+  width: 90vw;
+}
