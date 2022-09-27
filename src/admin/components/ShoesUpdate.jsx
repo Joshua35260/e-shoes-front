@@ -46,7 +46,7 @@ const ShoesUpdate = () => {
       setShoesSize(res.data[0].shoes_size);
       setShoesType(res.data[0].shoes_type);
       setShoesColor(res.data[0].shoes_color);
-      setShoesImage({ ...shoesImage, filepreview: res.data[0].shoes_image });
+      setShoesImage({ ...shoesImage, filepreview: res.data[0].shoes_img });
     });
   }, []);
   const editImg = (event) => {
@@ -70,8 +70,8 @@ const ShoesUpdate = () => {
       formdata.append("shoes_name", shoesName);
     shoesDescription !== defaultValue.shoes_description &&
       formdata.append("shoes_description", shoesDescription);
-    shoesImage.filepreview !== defaultValue.shoes_image &&
-      formdata.append("shoes_image", shoesImage.file);
+    shoesImage.filepreview !== defaultValue.shoes_img &&
+      formdata.append("shoes_img", shoesImage.file);
     shoesSize !== defaultValue.shoes_size &&
       formdata.append("shoes_size", shoesSize);
     shoesType !== defaultValue.shoes_type &&
@@ -126,13 +126,13 @@ const ShoesUpdate = () => {
             <label htmlFor="adminImage">
               Image partenaire (format paysage)
             </label>
-            <input type="file" name="shoes_image" onChange={editImg} />
+            <input type="file" name="shoes_img" onChange={editImg} />
 
             {shoesImage.filepreview !== null ? (
               <img
                 className="adminImgApercu"
                 src={
-                  shoesImage.filepreview !== defaultValue.shoes_image
+                  shoesImage.filepreview !== defaultValue.shoes_img
                     ? shoesImage.filepreview
                     : `http://localhost:5002/images/shoes/${shoesImage.filepreview}`
                 }
@@ -143,7 +143,7 @@ const ShoesUpdate = () => {
           <div className="adminChamp">
             <label htmlFor="adminZipCode">Marque</label>
             <input
-              type="number"
+              type="text"
               id="adminBrand"
               name="adminBrand"
               value={shoesBrand}

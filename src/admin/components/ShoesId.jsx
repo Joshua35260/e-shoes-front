@@ -53,7 +53,7 @@ const ShoesId = () => {
                   <figcaption>Illustration {shoes[0].shoes_name}</figcaption>
                   <img
                     className="regionPicture"
-                    src={`http://localhost:5002/images/shoes/${shoes[0].shoes_image}`}
+                    src={`http://localhost:5002/images/shoes/${shoes[0].shoes_img}`}
                     alt={shoes[0].shoes_name}
                   />
                 </figure>

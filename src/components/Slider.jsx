@@ -12,27 +12,26 @@ export default function SimpleSlider() {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-  const [sliderData, setSliderData] = useState([]);
+  const [shoes, setShoes] = useState([]);
   let { id } = useParams();
   useEffect(() => {
-    axios
-      .get(`http://localhost:5002/shoes/`)
-      .then((res) => setSliderData(res.data));
+    axios.get(`http://localhost:5002/shoes/`).then((res) => setShoes(res.data));
   }, []);
   return (
     <Slider {...settings}>
       <div>
+        test {shoes.shoes_name}
         <h3>
           <Link to={`/shoes/${id}`}>
             <img
               className="img-slider"
-              src={`http://localhost:5002/shoes/${sliderData.shoes_img}`}
+              src={`http://localhost:5002/shoes/${shoes.shoes_img}`}
               alt="slide"
             />
           </Link>
         </h3>
       </div>
-      <div>
+      {/* <div>
         <h3>2</h3>
       </div>
       <div>
@@ -46,7 +45,7 @@ export default function SimpleSlider() {
       </div>
       <div>
         <h3>6</h3>
-      </div>
+      </div> */}
     </Slider>
   );
 }

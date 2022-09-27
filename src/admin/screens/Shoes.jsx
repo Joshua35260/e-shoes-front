@@ -93,7 +93,7 @@ const Shoes = () => {
               <tr key={shoes.id}>
                 <th>{shoes.id}</th>
                 <td>{shoes.shoes_name}</td>
-                <td>{shoes.shoes_image}</td>
+                <td>{shoes.shoes_img}</td>
                 <td>{shoes.shoes_description}</td>
                 <td>{shoes.shoes_color}</td>
                 <td>{shoes.shoes_brand}</td>

@@ -19,6 +19,8 @@ const ShoesAdd = () => {
     file: "",
     filepreview: null,
   });
+  //pour les colors dans menu déroulant//
+  const [color, setColor] = useState([]);
   // message de validation //
   const navigate = useNavigate();
   const [isSuccess, setIsSuccess] = useState(null);
@@ -34,6 +36,13 @@ const ShoesAdd = () => {
     },
   };
 
+  // pour le map des colors dans le menu déroulant//
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5002/color/colorsNames`)
+      .then((res) => setColor(res.data));
+  }, []);
+
   const editImg = (event) => {
     setShoesImage({
       ...shoesImage,
@@ -46,7 +55,7 @@ const ShoesAdd = () => {
     e.preventDefault();
     console.log({
       shoesName,
-      shoes_image: shoesImage.file ? true : false,
+      shoes_img: shoesImage.file ? true : false,
       shoesDescription,
       shoesType,
       shoesBrand,
@@ -77,7 +86,7 @@ const ShoesAdd = () => {
       formdata.append("shoes_name", shoesName);
       formdata.append("shoes_description", shoesDescription);
       formdata.append("shoes_brand", shoesBrand);
-      formdata.append("shoes_image", shoesImage.file);
+      formdata.append("shoes_img", shoesImage.file);
       formdata.append("shoes_size", shoesSize);
 
       axios
@@ -121,8 +130,8 @@ const ShoesAdd = () => {
             <input
               type="text"
               id="adminName"
-              name="shoes_image"
-              placeholder="Nom du partenaire"
+              name="shoes_img"
+              placeholder="Nom de l'article"
               onChange={(e) => setShoesName(e.target.value)}
               required
             />
@@ -131,7 +140,7 @@ const ShoesAdd = () => {
             <label htmlFor="adminImage">
               Image de l'article (format paysage)
             </label>
-            <input type="file" name="shoes_image" onChange={editImg} required />
+            <input type="file" name="shoes_img" onChange={editImg} required />
             {shoesImage.filepreview !== null ? (
               <img
                 className="adminImgApercu"
@@ -165,7 +174,7 @@ const ShoesAdd = () => {
           <div className="adminChamp">
             <label htmlFor="adminSize">Size</label>
             <input
-              type="number"
+              type="text"
               id="adminSize"
               name="adminSize"
               placeholder="43"
@@ -174,15 +183,16 @@ const ShoesAdd = () => {
             />
           </div>
           <div className="adminChamp">
-            <label htmlFor="adminColor">Couleur</label>
-            <input
-              type="text"
-              id="adminColor"
-              name="adminColor"
-              placeholder="bleu"
-              onChange={(e) => setShoesColor(e.target.value)}
-              required
-            />
+            <label htmlFor="adminColor">color</label>
+            <select>
+              {color.map((color) => (
+                <colorOptions
+                  colorName={color.color_name}
+                  Lid={color.id}
+                  key={color.id}
+                />
+              ))}
+            </select>
           </div>
           <div className="adminChamp">
             <label htmlFor="adminDesc">Style</label>

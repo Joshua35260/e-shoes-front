@@ -16,14 +16,7 @@ function App() {
 
           {/* ROUTES ADMIN */}
           <Route path="login" element={<AdminLogin />} />
-          <Route
-            path="admin"
-            element={
-              <Protected>
-                <Admin />
-              </Protected>
-            }
-          >
+          <Route path="admin" element={<Admin />}>
             <Route path="contenu" element={<Shoes />} />
             <Route path="shoes" element={<Shoes />} />
           </Route>
