@@ -1,25 +1,32 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
 import AdminContext from "../contexts/AdminContext";
+import TypesOptions from "./TypeOptions";
+import BrandsOptions from "./BrandOptions";
+import SizesOptions from "./SizeOptions";
+import ColorsOptions from "./ColorOptions";
 
 import axios from "axios";
 
 const ShoesAdd = () => {
   const { handlePopUpAdd } = useContext(AdminContext);
 
+  //pour changer les options//
   const [shoesName, setShoesName] = useState("");
 
   const [shoesDescription, setShoesDescription] = useState("");
-  const [shoesBrand, setShoesBrand] = useState("");
-  const [shoesSize, setShoesSize] = useState("");
-  const [shoesType, setShoesType] = useState("");
-  const [shoesColor, setShoesColor] = useState("");
   const [shoesImage, setShoesImage] = useState({
     file: "",
     filepreview: null,
   });
-  //pour les colors dans menu déroulant//
+  const [shoesBrand, setShoesBrand] = useState("");
+  const [shoesSize, setShoesSize] = useState("");
+  const [shoesType, setShoesType] = useState("");
+  const [shoesColor, setShoesColor] = useState("");
+  //pour charger les menus déroulants//
+  const [brand, setBrand] = useState([]);
+  const [size, setSize] = useState([]);
+  const [type, setType] = useState([]);
   const [color, setColor] = useState([]);
   // message de validation //
   const navigate = useNavigate();
@@ -36,11 +43,33 @@ const ShoesAdd = () => {
     },
   };
 
-  // pour le map des colors dans le menu déroulant//
+  // pour le map des menus déroulants//
   useEffect(() => {
     axios
       .get(`http://localhost:5002/color/colorsNames`)
       .then((res) => setColor(res.data));
+    console.log("color", color);
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5002/type/typesNames`)
+      .then((res) => setType(res.data));
+    console.log("style", type);
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5002/size/sizes`)
+      .then((res) => setSize(res.data));
+    console.log("size", size);
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5002/brand/brandsNames`)
+      .then((res) => setBrand(res.data));
+    console.log("marque", brand);
   }, []);
 
   const editImg = (event) => {
@@ -55,39 +84,40 @@ const ShoesAdd = () => {
     e.preventDefault();
     console.log({
       shoesName,
-      shoes_img: shoesImage.file ? true : false,
       shoesDescription,
-      shoesType,
+      shoes_img: shoesImage.file ? true : false,
       shoesBrand,
-      shoesColor,
       shoesSize,
+      shoesType,
+      shoesColor,
       success:
         shoesName &&
+        shoesDescription &&
         shoesImage.file &&
         shoesBrand &&
-        shoesColor &&
-        shoesDescription &&
+        shoesSize &&
         shoesType &&
-        shoesSize
+        shoesColor
           ? true
           : false,
     });
     if (
       shoesName &&
+      shoesDescription &&
       shoesImage.file &&
       shoesBrand &&
-      shoesColor &&
-      shoesDescription &&
-      shoesType
+      shoesSize &&
+      shoesType &&
+      shoesColor
     ) {
       const formdata = new FormData();
-      formdata.append("shoes_brand", shoesBrand);
-      formdata.append("shoes_color", shoesColor);
       formdata.append("shoes_name", shoesName);
       formdata.append("shoes_description", shoesDescription);
-      formdata.append("shoes_brand", shoesBrand);
       formdata.append("shoes_img", shoesImage.file);
-      formdata.append("shoes_size", shoesSize);
+      formdata.append("brand_id", shoesBrand);
+      formdata.append("size_id", shoesSize);
+      formdata.append("type_id", shoesType);
+      formdata.append("color_id", shoesColor);
 
       axios
         .post(`http://localhost:5002/shoes/add`, formdata, {
@@ -137,9 +167,7 @@ const ShoesAdd = () => {
             />
           </div>
           <div className="adminChamp" id="forLeft">
-            <label htmlFor="adminImage">
-              Image de l'article (format paysage)
-            </label>
+            <label htmlFor="adminImage">Image de l'article</label>
             <input type="file" name="shoes_img" onChange={editImg} required />
             {shoesImage.filepreview !== null ? (
               <img
@@ -162,33 +190,56 @@ const ShoesAdd = () => {
           </div>
           <div className="adminChamp">
             <label htmlFor="adminShoes">Marque</label>
-            <input
-              type="text"
-              id="adminShoes"
-              name="adminShoes"
-              placeholder="Marque"
+            <select
+              className="adminSelect"
               onChange={(e) => setShoesBrand(e.target.value)}
               required
-            />
+            >
+              <option className="adminOption" value="...">
+                ...
+              </option>
+              {brand.map((brand) => (
+                <BrandsOptions
+                  brandName={brand.brand_name}
+                  Bid={brand.id}
+                  key={brand.id}
+                />
+              ))}
+            </select>
           </div>
           <div className="adminChamp">
             <label htmlFor="adminSize">Size</label>
-            <input
-              type="text"
-              id="adminSize"
-              name="adminSize"
-              placeholder="43"
+            <select
+              className="adminSelect"
               onChange={(e) => setShoesSize(e.target.value)}
               required
-            />
+            >
+              <option className="adminOption" value="...">
+                ...
+              </option>
+              {size.map((size) => (
+                <SizesOptions
+                  sizeName={size.size_name}
+                  Sid={size.id}
+                  key={size.id}
+                />
+              ))}
+            </select>
           </div>
           <div className="adminChamp">
             <label htmlFor="adminColor">color</label>
-            <select>
+            <select
+              className="adminSelect"
+              onChange={(e) => setShoesColor(e.target.value)}
+              required
+            >
+              <option className="adminOption" value="...">
+                ...
+              </option>
               {color.map((color) => (
-                <colorOptions
+                <ColorsOptions
                   colorName={color.color_name}
-                  Lid={color.id}
+                  Cid={color.id}
                   key={color.id}
                 />
               ))}
@@ -196,14 +247,22 @@ const ShoesAdd = () => {
           </div>
           <div className="adminChamp">
             <label htmlFor="adminDesc">Style</label>
-            <textarea
-              type="text"
-              id="adminStyle"
-              name="adminStyle"
-              placeholder="Ajouter le style"
+            <select
+              className="adminSelect"
               onChange={(e) => setShoesType(e.target.value)}
               required
-            />
+            >
+              <option className="adminOption" value="...">
+                ...
+              </option>
+              {type.map((type) => (
+                <TypesOptions
+                  typeName={type.type_name}
+                  Tid={type.id}
+                  key={type.id}
+                />
+              ))}
+            </select>
           </div>
           {isSuccess !== null ? (
             <h4 style={styles.isUpload}>{isSuccess.message}</h4>
