@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from "react";
 
 import AdminContext from "../contexts/AdminContext";
 
-import ShoesAdd from "../components/ShoesAdd";
-import ShoesUpdate from "../components/ShoesUpdate";
-import ShoesId from "../components/ShoesId";
+import TypeAdd from "../components/TypeAdd";
+import TypeUpdate from "../components/TypeUpdate";
+import TypeId from "../components/TypeId";
 
 import axios from "axios";
 import { motion } from "framer-motion";
@@ -15,7 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 
-const Shoes = () => {
+const Type = () => {
   const {
     addPopUp,
     modPopUp,
@@ -26,80 +26,68 @@ const Shoes = () => {
     handlePopUpView,
   } = useContext(AdminContext);
 
-  const [shoes, setShoes] = useState([]);
+  const [type, setType] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5002/shoes").then((res) => setShoes(res.data));
+    axios.get("http://localhost:5002/type").then((res) => setType(res.data));
   }, [refresh]);
 
-  function deleteShoes(modId) {
+  function deleteType(modId) {
     axios
-      .delete(`http://localhost:5002/shoes/${modId}`)
+      .delete(`http://localhost:5002/type/${modId}`)
       .then(() => setRefresh(!refresh));
   }
 
   const rClick = () => {
-    const element = document.getElementById("shoesTable");
+    const element = document.getElementById("typeTable");
     element.scrollBy(100, 0);
   };
 
   const lClick = () => {
-    const element = document.getElementById("shoesTable");
+    const element = document.getElementById("typeTable");
     element.scrollBy(-100, 0);
   };
 
   return (
     <div className="entity" id="entity">
-      {addPopUp && <ShoesAdd />}
-      {modPopUp && <ShoesUpdate id={modId} />}
-      {viewPopUp && <ShoesId id={modId} />}
-      <h1 className="entity-title">Articles</h1>
+      {addPopUp && <TypeAdd />}
+      {modPopUp && <TypeUpdate id={modId} />}
+      {viewPopUp && <TypeId id={modId} />}
+      <h1 className="entity-title">Styles</h1>
       <div className="adminControls">
         <motion.button
           className="entry-add"
           onClick={handlePopUpAdd}
           whileHover={{ scale: 1.1 }}
         >
-          Ajouter un article
+          Ajouter un style
         </motion.button>
         <div>
           <input
             className="searchInTable"
             type="text"
-            placeholder="Rechercher un article"
+            placeholder="Rechercher un style"
             onChange={(event) => {
               setSearchTerm(event.target.value);
             }}
           />
         </div>
       </div>
-      <div className="entity-container" id="shoesTable">
+      <div className="entity-container" id="typeTable">
         <table className="entity-table">
           <thead>
             <tr>
               <th>id</th>
-              <th>Nom</th>
-              <th>Image</th>
-              <th>Description</th>
-              <th>Marque</th>
-              <th>Taille</th>
-              <th>Couleur</th>
               <th>Style</th>
             </tr>
           </thead>
           <tbody>
-            {shoes.map((shoes) => (
-              <tr key={shoes.id}>
-                <th>id{shoes.id}</th>
-                <td>{shoes.shoes_name}</td>
-                <td>{shoes.shoes_img}</td>
-                <td>{shoes.shoes_description}</td>
-                <td>{shoes.shoes_brand}</td>
-                <td>{shoes.shoes_size}</td>
-                <td>{shoes.shoes_color}</td>
-                <td>{shoes.shoes_style}</td>
+            {type.map((type) => (
+              <tr key={type.id}>
+                <th>{type.id}</th>
+                <td>{type.type_name}</td>
 
                 <td className="entity-action">
                   <VisibilityOutlinedIcon
@@ -108,7 +96,7 @@ const Shoes = () => {
                       fill: "lightblue",
                       marginRight: "12",
                     }}
-                    onClick={() => handlePopUpView(shoes.id)}
+                    onClick={() => handlePopUpView(type.id)}
                   />
                   <ModeEditIcon
                     style={{
@@ -116,15 +104,15 @@ const Shoes = () => {
                       fill: "white",
                       marginRight: "12",
                     }}
-                    onClick={() => handlePopUpMod(shoes.id)}
+                    onClick={() => handlePopUpMod(type.id)}
                   />
 
                   <DeleteIcon
                     style={{ cursor: "pointer", fill: "#e71111" }}
                     onClick={() => {
                       window.confirm(
-                        `Êtes-vous sûr de vouloir supprimer l'article : ${shoes.shoes_name} ?`
-                      ) && deleteShoes(shoes.id);
+                        `Êtes-vous sûr de vouloir supprimer ce style ? ${type.type_name} ?`
+                      ) && deleteType(type.id);
                     }}
                   />
                 </td>
@@ -151,4 +139,4 @@ const Shoes = () => {
   );
 };
 
-export default Shoes;
+export default Type;

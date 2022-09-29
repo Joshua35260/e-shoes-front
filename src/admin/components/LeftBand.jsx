@@ -29,7 +29,7 @@ const LeftBand = () => {
           <h2>Styles</h2>
         </NavLink>
         <NavLink
-          to="colors"
+          to="color"
           className={({ isActive }) => (isActive ? "link-active" : "link")}
         >
           <h2>Couleurs</h2>

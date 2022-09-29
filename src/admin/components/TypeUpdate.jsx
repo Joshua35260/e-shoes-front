@@ -4,20 +4,20 @@ import AdminContext from "../contexts/AdminContext";
 
 import axios from "axios";
 
-const SizeUpdate = () => {
+const TypeUpdate = () => {
   const { handlePopUpMod, modId } = useContext(AdminContext);
   //stockage donnée placeholder//
   const [defaultValue, setDefaultValue] = useState({});
 
-  const [sizeName, setSizeName] = useState("");
+  const [typeName, setTypeName] = useState("");
 
   const [isSuccess, setIsSuccess] = useState(null);
 
   //charge données pour le placeholder//
   useEffect(() => {
-    axios.get(`http://localhost:5002/size/${modId}`).then((res) => {
+    axios.get(`http://localhost:5002/type/${modId}`).then((res) => {
       setDefaultValue(res.data[0]);
-      setSizeName(res.data[0].size_name);
+      setTypeName(res.data[0].type_name);
     });
   }, []);
 
@@ -27,18 +27,18 @@ const SizeUpdate = () => {
     e.preventDefault();
 
     const data = {
-      size_name: sizeName,
+      type_name: typeName,
     };
 
-    axios.put(`http://localhost:5002/size/edit/${modId}`, data).then((res) => {
+    axios.put(`http://localhost:5002/type/edit/${modId}`, data).then((res) => {
       console.warn(res);
       if (res.data.success === 1) {
         setIsSuccess({
-          message: "Modification de la taille validé",
+          message: "Modification du style validé",
         });
       } else {
         setIsSuccess({
-          message: "Modification de la taille refusé",
+          message: "Modification du style refusé",
         });
       }
     });
@@ -59,15 +59,15 @@ const SizeUpdate = () => {
           <div className="adminRightBand addForm">
             <div className="modalBg" onClick={handlePopUpMod}></div>
             <form className="adminForm" onSubmit={(e) => submit(e)}>
-              <p className="adminTitle">Modifier une taille</p>
+              <p className="adminTitle">Modifier un style</p>
               <div className="adminChamp">
-                <label htmlFor="adminName">Taille</label>
+                <label htmlFor="adminName">Style</label>
                 <input
                   type="text"
                   id="adminName"
-                  name="size_name"
-                  placeholder="Taille"
-                  onChange={(e) => setSizeName(e.target.value)}
+                  name="type_name"
+                  placeholder="Style"
+                  onChange={(e) => setTypeName(e.target.value)}
                   required
                 />
               </div>
@@ -96,4 +96,4 @@ const SizeUpdate = () => {
   );
 };
 
-export default SizeUpdate;
+export default TypeUpdate;

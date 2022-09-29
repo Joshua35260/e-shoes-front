@@ -1,51 +1,76 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import axios from "axios";
-import Slider from "react-slick";
 
-export default function SimpleSlider() {
-  var settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-  };
-  const [shoes, setShoes] = useState([]);
-  let { id } = useParams();
+const Slider = () => {
+  const [currentSlide, setCurrenteSlide] = useState(0);
+  const [sliderData, setSliderData] = useState([]);
+
   useEffect(() => {
-    axios.get(`http://localhost:5002/shoes/`).then((res) => setShoes(res.data));
+    axios
+      .get(`http://localhost:5002/shoes`)
+      .then((res) => setSliderData(res.data));
   }, []);
+
+  const slideLength = sliderData.length;
+
+  const autoScroll = true;
+  let slideInterval;
+  let intervalTime = 7000;
+
+  const nextSlide = () => {
+    setCurrenteSlide(currentSlide === slideLength - 1 ? 0 : currentSlide + 1);
+  };
+
+  const prevSlide = () => {
+    setCurrenteSlide(currentSlide === 0 ? slideLength - 1 : currentSlide - 1);
+  };
+
+  function autoSlide() {
+    slideInterval = setInterval(nextSlide, intervalTime);
+  }
+
+  useEffect(() => {
+    setCurrenteSlide(0);
+  }, []);
+
+  useEffect(() => {
+    if (autoScroll) {
+      autoSlide();
+    }
+    return () => clearInterval(slideInterval);
+  }, [autoScroll, autoSlide, currentSlide, slideInterval]);
+
   return (
-    <Slider {...settings}>
-      <div>
-        test {shoes.shoes_name}
-        <h3>
-          <Link to={`/shoes/${id}`}>
-            <img
-              className="img-slider"
-              src={`http://localhost:5002/shoes/${shoes.shoes_img}`}
-              alt="slide"
-            />
-          </Link>
-        </h3>
-      </div>
-      {/* <div>
-        <h3>2</h3>
-      </div>
-      <div>
-        <h3>3</h3>
-      </div>
-      <div>
-        <h3>4</h3>
-      </div>
-      <div>
-        <h3>5</h3>
-      </div>
-      <div>
-        <h3>6</h3>
-      </div> */}
-    </Slider>
+    <div className="slider">
+      <AiOutlineLeft className="arrow-slider prev" onClick={prevSlide} />
+      <AiOutlineRight className="arrow-slider next" onClick={nextSlide} />
+
+      {sliderData.map((slide, index) => {
+        return (
+          <div
+            className={
+              index === currentSlide ? "slide-slider current" : "slide-slider"
+            }
+            key={index}
+          >
+            {index === currentSlide && (
+              <div>
+                <Link to={`/regions/${slide.id}`}>
+                  <img
+                    className="img-slider"
+                    src={`http://localhost:5002/images/shoes/${slide.shoes_img}`}
+                    alt="slide"
+                  />
+                </Link>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
-}
+};
+
+export default Slider;

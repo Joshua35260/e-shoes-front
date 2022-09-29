@@ -62,20 +62,20 @@ const ShoesId = () => {
             <div className="contactInfo">
               <fieldset>
                 <legend>Marque</legend>
-                <h1>{shoes[0].shoes_brand}</h1>
+                <h1>{shoes[0].brand_name}</h1>
               </fieldset>
               <fieldset>
                 <legend>Style</legend>
-                <h1>{shoes[0].shoes_type}</h1>
+                <h1>{shoes[0].type_name}</h1>
               </fieldset>
               <fieldset>
                 <legend>Couleur</legend>
-                <h1>{shoes[0].shoes_color}</h1>
+                <h1>{shoes[0].color_name}</h1>
               </fieldset>
             </div>
             <div className="openingHours">
-              <h1>Taille</h1>
-              <p>{shoes[0].shoes_size}</p>
+              <legend>Taille</legend>
+              <h1>{shoes[0].size_name}</h1>
             </div>
             <div className="descInfo">
               <div className="descContainer">
