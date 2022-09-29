@@ -227,7 +227,7 @@ const ShoesAdd = () => {
             </select>
           </div>
           <div className="adminChamp">
-            <label htmlFor="adminColor">color</label>
+            <label htmlFor="adminColor">couleur</label>
             <select
               className="adminSelect"
               onChange={(e) => setShoesColor(e.target.value)}

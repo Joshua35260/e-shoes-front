@@ -8,27 +8,28 @@ import ColorsOptions from "./ColorOptions";
 
 import axios from "axios";
 
-const ShoesUpdate = () => {
-  const { handlePopUpMod, modId } = useContext(AdminContext);
+const ShoesAdd = () => {
+  const { handlePopUpAdd } = useContext(AdminContext);
 
+  //pour changer les options//
   const [shoesName, setShoesName] = useState("");
 
   const [shoesDescription, setShoesDescription] = useState("");
-  const [shoesBrand, setShoesBrand] = useState("");
-  const [shoesSize, setShoesSize] = useState("");
-  const [shoesType, setShoesType] = useState("");
-  const [shoesColor, setShoesColor] = useState("");
   const [shoesImage, setShoesImage] = useState({
     file: "",
     filepreview: null,
   });
-
+  const [shoesBrand, setShoesBrand] = useState("");
+  const [shoesSize, setShoesSize] = useState("");
+  const [shoesType, setShoesType] = useState("");
+  const [shoesColor, setShoesColor] = useState("");
   //pour charger les menus déroulants//
   const [brand, setBrand] = useState([]);
   const [size, setSize] = useState([]);
   const [type, setType] = useState([]);
   const [color, setColor] = useState([]);
-
+  // message de validation //
+  const navigate = useNavigate();
   const [isSuccess, setIsSuccess] = useState(null);
   const styles = {
     isUpload: {
@@ -41,31 +42,6 @@ const ShoesUpdate = () => {
       margin: "1.5em 0 0 0",
     },
   };
-
-  //stockage donnée placeholder//
-  const [defaultValue, setDefaultValue] = useState({});
-
-  //charge données pour le placeholder//
-  useEffect(() => {
-    axios.get(`http://localhost:5002/shoes/${modId}`).then((res) => {
-      setDefaultValue(res.data[0]);
-      setShoesName(res.data[0].shoes_name);
-      setShoesDescription(res.data[0].shoes_description);
-      setShoesBrand(res.data[0].brand_id);
-      setShoesSize(res.data[0].size_id);
-      setShoesType(res.data[0].type_id);
-      setShoesColor(res.data[0].color_id);
-      setShoesImage({ ...shoesImage, filepreview: res.data[0].shoes_img });
-    });
-  }, []);
-  const editImg = (event) => {
-    setShoesImage({
-      ...shoesImage,
-      file: event.target.files[0],
-      filepreview: URL.createObjectURL(event.target.files[0]),
-    });
-  };
-  const navigate = useNavigate();
 
   // pour le map des menus déroulants//
   useEffect(() => {
@@ -95,42 +71,73 @@ const ShoesUpdate = () => {
       .then((res) => setBrand(res.data));
     console.log("marque", brand);
   }, []);
+
+  const editImg = (event) => {
+    setShoesImage({
+      ...shoesImage,
+      file: event.target.files[0],
+      filepreview: URL.createObjectURL(event.target.files[0]),
+    });
+  };
+
   const submit = async (e) => {
     e.preventDefault();
-
-    const formdata = new FormData();
-
-    shoesName !== defaultValue.shoes_name &&
+    console.log({
+      shoesName,
+      shoesDescription,
+      shoes_img: shoesImage.file ? true : false,
+      shoesBrand,
+      shoesSize,
+      shoesType,
+      shoesColor,
+      success:
+        shoesName &&
+        shoesDescription &&
+        shoesImage.file &&
+        shoesBrand &&
+        shoesSize &&
+        shoesType &&
+        shoesColor
+          ? true
+          : false,
+    });
+    if (
+      shoesName &&
+      shoesDescription &&
+      shoesImage.file &&
+      shoesBrand &&
+      shoesSize &&
+      shoesType &&
+      shoesColor
+    ) {
+      const formdata = new FormData();
       formdata.append("shoes_name", shoesName);
-    shoesDescription !== defaultValue.shoes_description &&
       formdata.append("shoes_description", shoesDescription);
-    shoesImage.filepreview !== defaultValue.shoes_img &&
       formdata.append("shoes_img", shoesImage.file);
-    shoesBrand !== defaultValue.brand_id &&
       formdata.append("brand_id", shoesBrand);
-    shoesSize !== defaultValue.size_id && formdata.append("size_id", shoesSize);
-    shoesType !== defaultValue.type_id && formdata.append("type_id", shoesType);
-    shoesColor !== defaultValue.color_id &&
+      formdata.append("size_id", shoesSize);
+      formdata.append("type_id", shoesType);
       formdata.append("color_id", shoesColor);
 
-    axios
-      .put(`http://localhost:5002/shoes/edit/${modId}`, formdata, {
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((res) => {
-        console.warn(res);
-        if (res.data.success === 1) {
-          setIsSuccess({
-            message: "Modification de l'article validée",
-            uploadOk: res.data.success,
-          });
-        } else {
-          setIsSuccess({
-            message: "Aucune modification appliquée à l'article",
-            uploadOk: res.data.success,
-          });
-        }
-      });
+      axios
+        .post(`http://localhost:5002/shoes/add`, formdata, {
+          headers: { "Content-Type": "multipart/form-data" },
+        })
+        .then((res) => {
+          console.warn(res);
+          if (res.data.success === 1) {
+            setIsSuccess({
+              message: "Ajout de l'article validé",
+              uploadOk: res.data.success,
+            });
+          } else {
+            setIsSuccess({
+              message: "Ajout de l'article refusé",
+              uploadOk: res.data.success,
+            });
+          }
+        });
+    }
   };
 
   useEffect(() => {
@@ -142,46 +149,43 @@ const ShoesUpdate = () => {
 
   return (
     <div className="admin">
+      <p className="logout">Logout</p>
+
       <div className="adminRightBand addForm">
-        <div className="modalBg" onClick={handlePopUpMod}></div>
+        <div className="modalBg" onClick={handlePopUpAdd}></div>
         <form className="adminForm" onSubmit={(e) => submit(e)}>
-          <p className="adminTitle">
-            Modifier l'article' {defaultValue.shoes_name}
-          </p>
+          <p className="adminTitle">Ajouter un article</p>
           <div className="adminChamp">
-            <label htmlFor="adminName">Nom de l'article </label>
+            <label htmlFor="adminName">Nom de l'article</label>
             <input
               type="text"
               id="adminName"
-              name="adminName"
-              value={shoesName}
+              name="shoes_img"
+              placeholder="Nom de l'article"
               onChange={(e) => setShoesName(e.target.value)}
+              required
             />
           </div>
           <div className="adminChamp" id="forLeft">
             <label htmlFor="adminImage">Image de l'article</label>
-            <input type="file" name="shoes_img" onChange={editImg} />
-
+            <input type="file" name="shoes_img" onChange={editImg} required />
             {shoesImage.filepreview !== null ? (
               <img
                 className="adminImgApercu"
-                src={
-                  shoesImage.filepreview !== defaultValue.shoes_img
-                    ? shoesImage.filepreview
-                    : `http://localhost:5002/images/shoes/${shoesImage.filepreview}`
-                }
+                src={shoesImage.filepreview}
                 alt="UploadImage"
               />
             ) : null}
           </div>
           <div className="adminChamp">
-            <label htmlFor="adminDescFR">Description</label>
+            <label htmlFor="adminDesc">Description</label>
             <textarea
               type="text"
               id="adminDesc"
               name="adminDesc"
-              value={shoesDescription}
+              placeholder="Ajouter une description"
               onChange={(e) => setShoesDescription(e.target.value)}
+              required
             />
           </div>
           <div className="adminChamp">
@@ -189,7 +193,7 @@ const ShoesUpdate = () => {
             <select
               className="adminSelect"
               onChange={(e) => setShoesBrand(e.target.value)}
-              value={shoesBrand}
+              required
             >
               <option className="adminOption" value="...">
                 ...
@@ -204,11 +208,11 @@ const ShoesUpdate = () => {
             </select>
           </div>
           <div className="adminChamp">
-            <label htmlFor="adminSize">Taille</label>
+            <label htmlFor="adminSize">Size</label>
             <select
               className="adminSelect"
               onChange={(e) => setShoesSize(e.target.value)}
-              value={shoesSize}
+              required
             >
               <option className="adminOption" value="...">
                 ...
@@ -223,30 +227,11 @@ const ShoesUpdate = () => {
             </select>
           </div>
           <div className="adminChamp">
-            <label htmlFor="adminType">Style</label>
-            <select
-              className="adminSelect"
-              onChange={(e) => setShoesType(e.target.value)}
-              value={shoesType}
-            >
-              <option className="adminOption" value="...">
-                ...
-              </option>
-              {type.map((type) => (
-                <TypesOptions
-                  typeName={type.type_name}
-                  Tid={type.id}
-                  key={type.id}
-                />
-              ))}
-            </select>
-          </div>
-          <div className="adminChamp">
-            <label htmlFor="adminColor">couleur</label>
+            <label htmlFor="adminColor">color</label>
             <select
               className="adminSelect"
               onChange={(e) => setShoesColor(e.target.value)}
-              value={shoesColor}
+              required
             >
               <option className="adminOption" value="...">
                 ...
@@ -260,11 +245,30 @@ const ShoesUpdate = () => {
               ))}
             </select>
           </div>
+          <div className="adminChamp">
+            <label htmlFor="adminDesc">Style</label>
+            <select
+              className="adminSelect"
+              onChange={(e) => setShoesType(e.target.value)}
+              required
+            >
+              <option className="adminOption" value="...">
+                ...
+              </option>
+              {type.map((type) => (
+                <TypesOptions
+                  typeName={type.type_name}
+                  Tid={type.id}
+                  key={type.id}
+                />
+              ))}
+            </select>
+          </div>
           {isSuccess !== null ? (
             <h4 style={styles.isUpload}>{isSuccess.message}</h4>
           ) : null}
           <button className="adminFormButton" type="submit">
-            Modifier
+            Ajouter
           </button>
         </form>
       </div>
@@ -272,4 +276,4 @@ const ShoesUpdate = () => {
   );
 };
 
-export default ShoesUpdate;
+export default ShoesAdd;
