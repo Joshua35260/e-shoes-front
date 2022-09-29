@@ -3,6 +3,8 @@ import Homepage from "./screens/Homepage";
 import Admin from "./admin/screens/Admin";
 import AdminLogin from "./admin/screens/AdminLogin";
 import Shoes from "./admin/screens/Shoes";
+import Brand from "./admin/screens/Brand";
+import Size from "./admin/screens/Size";
 import { AdminContextProvider } from "./admin/contexts/AdminContext";
 import Protected from "./admin/components/Protected";
 
@@ -19,6 +21,8 @@ function App() {
           <Route path="admin" element={<Admin />}>
             <Route path="contenu" element={<Shoes />} />
             <Route path="shoes" element={<Shoes />} />
+            <Route path="brand" element={<Brand />} />
+            <Route path="size" element={<Size />} />
           </Route>
         </Routes>
       </AdminContextProvider>

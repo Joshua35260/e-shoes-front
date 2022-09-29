@@ -121,7 +121,7 @@ const Shoes = () => {
                     style={{ cursor: "pointer", fill: "#e71111" }}
                     onClick={() => {
                       window.confirm(
-                        `Êtes-vous sûr de vouloir supprimer le partenaire : ${shoes.shoes_name} ?`
+                        `Êtes-vous sûr de vouloir supprimer l'article : ${shoes.shoes_name} ?`
                       ) && deleteShoes(shoes.id);
                     }}
                   />

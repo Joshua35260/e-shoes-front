@@ -17,6 +17,12 @@ const LeftBand = () => {
           <h2>Marques</h2>
         </NavLink>
         <NavLink
+          to="size"
+          className={({ isActive }) => (isActive ? "link-active" : "link")}
+        >
+          <h2>Tailles</h2>
+        </NavLink>
+        <NavLink
           to="type"
           className={({ isActive }) => (isActive ? "link-active" : "link")}
         >
