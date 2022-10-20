@@ -65,10 +65,6 @@ const ShoesId = () => {
                 <h1>{shoes[0].brand_name}</h1>
               </fieldset>
               <fieldset>
-                <legend>Style</legend>
-                <h1>{shoes[0].type_name}</h1>
-              </fieldset>
-              <fieldset>
                 <legend>Couleur</legend>
                 <h1>{shoes[0].color_name}</h1>
               </fieldset>

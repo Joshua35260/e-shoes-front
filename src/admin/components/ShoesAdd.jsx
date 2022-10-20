@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminContext from "../contexts/AdminContext";
-import TypesOptions from "./TypeOptions";
 import BrandsOptions from "./BrandOptions";
 import SizesOptions from "./SizeOptions";
 import ColorsOptions from "./ColorOptions";
@@ -21,12 +20,10 @@ const ShoesAdd = () => {
   });
   const [shoesBrand, setShoesBrand] = useState("");
   const [shoesSize, setShoesSize] = useState("");
-  const [shoesType, setShoesType] = useState("");
   const [shoesColor, setShoesColor] = useState("");
   //pour charger les menus déroulants//
   const [brand, setBrand] = useState([]);
   const [size, setSize] = useState([]);
-  const [type, setType] = useState([]);
   const [color, setColor] = useState([]);
   // message de validation //
   const navigate = useNavigate();
@@ -49,13 +46,6 @@ const ShoesAdd = () => {
       .get(`http://localhost:5002/color/colorsNames`)
       .then((res) => setColor(res.data));
     console.log("color", color);
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5002/type/typesNames`)
-      .then((res) => setType(res.data));
-    console.log("style", type);
   }, []);
 
   useEffect(() => {
@@ -88,7 +78,6 @@ const ShoesAdd = () => {
       shoes_img: shoesImage.file ? true : false,
       shoesBrand,
       shoesSize,
-      shoesType,
       shoesColor,
       success:
         shoesName &&
@@ -96,7 +85,6 @@ const ShoesAdd = () => {
         shoesImage.file &&
         shoesBrand &&
         shoesSize &&
-        shoesType &&
         shoesColor
           ? true
           : false,
@@ -107,7 +95,6 @@ const ShoesAdd = () => {
       shoesImage.file &&
       shoesBrand &&
       shoesSize &&
-      shoesType &&
       shoesColor
     ) {
       const formdata = new FormData();
@@ -116,7 +103,6 @@ const ShoesAdd = () => {
       formdata.append("shoes_img", shoesImage.file);
       formdata.append("brand_id", shoesBrand);
       formdata.append("size_id", shoesSize);
-      formdata.append("type_id", shoesType);
       formdata.append("color_id", shoesColor);
 
       axios
@@ -241,25 +227,6 @@ const ShoesAdd = () => {
                   colorName={color.color_name}
                   Cid={color.id}
                   key={color.id}
-                />
-              ))}
-            </select>
-          </div>
-          <div className="adminChamp">
-            <label htmlFor="adminDesc">Style</label>
-            <select
-              className="adminSelect"
-              onChange={(e) => setShoesType(e.target.value)}
-              required
-            >
-              <option className="adminOption" value="...">
-                ...
-              </option>
-              {type.map((type) => (
-                <TypesOptions
-                  typeName={type.type_name}
-                  Tid={type.id}
-                  key={type.id}
                 />
               ))}
             </select>

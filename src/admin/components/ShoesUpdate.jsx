@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AdminContext from "../contexts/AdminContext";
-import TypesOptions from "./TypeOptions";
 import BrandsOptions from "./BrandOptions";
 import SizesOptions from "./SizeOptions";
 import ColorsOptions from "./ColorOptions";
@@ -16,7 +15,6 @@ const ShoesUpdate = () => {
   const [shoesDescription, setShoesDescription] = useState("");
   const [shoesBrand, setShoesBrand] = useState("");
   const [shoesSize, setShoesSize] = useState("");
-  const [shoesType, setShoesType] = useState("");
   const [shoesColor, setShoesColor] = useState("");
   const [shoesImage, setShoesImage] = useState({
     file: "",
@@ -26,7 +24,6 @@ const ShoesUpdate = () => {
   //pour charger les menus déroulants//
   const [brand, setBrand] = useState([]);
   const [size, setSize] = useState([]);
-  const [type, setType] = useState([]);
   const [color, setColor] = useState([]);
 
   const [isSuccess, setIsSuccess] = useState(null);
@@ -53,7 +50,6 @@ const ShoesUpdate = () => {
       setShoesDescription(res.data[0].shoes_description);
       setShoesBrand(res.data[0].brand_id);
       setShoesSize(res.data[0].size_id);
-      setShoesType(res.data[0].type_id);
       setShoesColor(res.data[0].color_id);
       setShoesImage({ ...shoesImage, filepreview: res.data[0].shoes_img });
     });
@@ -73,13 +69,6 @@ const ShoesUpdate = () => {
       .get(`http://localhost:5002/color/colorsNames`)
       .then((res) => setColor(res.data));
     console.log("color", color);
-  }, []);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5002/type/typesNames`)
-      .then((res) => setType(res.data));
-    console.log("style", type);
   }, []);
 
   useEffect(() => {
@@ -109,7 +98,6 @@ const ShoesUpdate = () => {
     shoesBrand !== defaultValue.brand_id &&
       formdata.append("brand_id", shoesBrand);
     shoesSize !== defaultValue.size_id && formdata.append("size_id", shoesSize);
-    shoesType !== defaultValue.type_id && formdata.append("type_id", shoesType);
     shoesColor !== defaultValue.color_id &&
       formdata.append("color_id", shoesColor);
 
@@ -218,25 +206,6 @@ const ShoesUpdate = () => {
                   sizeName={size.size_name}
                   Sid={size.id}
                   key={size.id}
-                />
-              ))}
-            </select>
-          </div>
-          <div className="adminChamp">
-            <label htmlFor="adminType">Style</label>
-            <select
-              className="adminSelect"
-              onChange={(e) => setShoesType(e.target.value)}
-              value={shoesType}
-            >
-              <option className="adminOption" value="...">
-                ...
-              </option>
-              {type.map((type) => (
-                <TypesOptions
-                  typeName={type.type_name}
-                  Tid={type.id}
-                  key={type.id}
                 />
               ))}
             </select>

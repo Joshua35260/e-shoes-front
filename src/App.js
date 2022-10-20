@@ -6,7 +6,6 @@ import Shoes from "./admin/screens/Shoes";
 import Brand from "./admin/screens/Brand";
 import Size from "./admin/screens/Size";
 import Color from "./admin/screens/Color";
-import Type from "./admin/screens/Type";
 import { AdminContextProvider } from "./admin/contexts/AdminContext";
 import Protected from "./admin/components/Protected";
 
@@ -25,7 +24,6 @@ function App() {
             <Route path="shoes" element={<Shoes />} />
             <Route path="brand" element={<Brand />} />
             <Route path="size" element={<Size />} />
-            <Route path="type" element={<Type />} />
             <Route path="color" element={<Color />} />
           </Route>
         </Routes>
