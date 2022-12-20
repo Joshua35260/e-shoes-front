@@ -40,6 +40,7 @@ const ShoesAdd = () => {
     },
   };
 
+
   // pour le map des menus déroulants//
   useEffect(() => {
     axios
@@ -196,9 +197,10 @@ const ShoesAdd = () => {
           <div className="adminChamp">
             <label htmlFor="adminSize">Size</label>
             <select
+              multiple
               className="adminSelect"
               onChange={(e) => setShoesSize(e.target.value)}
-              required
+              type="checkbox"
             >
               <option className="adminOption" value="...">
                 ...

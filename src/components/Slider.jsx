@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Slide } from "@mui/material";
 
 const Slider = () => {
   const [currentSlide, setCurrenteSlide] = useState(0);
@@ -57,13 +58,17 @@ const Slider = () => {
           >
             {index === currentSlide && (
               <div>
-                <Link to={`/regions/${slide.id}`}>
+                <Link to={`/article/${slide.id}`}>
                   <img
                     className="img-slider"
                     src={`http://localhost:5002/images/shoes/${slide.shoes_img}`}
                     alt="slide"
                   />
                 </Link>
+                {slide.shoes_name}
+                {slide.shoes_size}
+                {slide.shoes_color}
+                {slide.shoes_description}
               </div>
             )}
           </div>

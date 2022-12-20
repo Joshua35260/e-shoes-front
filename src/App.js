@@ -1,5 +1,6 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Homepage from "./screens/Homepage";
+import Article from "./screens/Article";
 import Admin from "./admin/screens/Admin";
 import AdminLogin from "./admin/screens/AdminLogin";
 import Shoes from "./admin/screens/Shoes";
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           {/* ROUTES APP */}
           <Route path="/" element={<Homepage />} />
+          <Route path="article/:id" element={<Article />} />
 
           {/* ROUTES ADMIN */}
           <Route path="login" element={<AdminLogin />} />
